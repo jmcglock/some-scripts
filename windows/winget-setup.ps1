@@ -1,0 +1,2 @@
+# install the following packages with winget
+winget install Termius.Termius 7zip.7zip BleachBit.BleachBit ahmetb.kubens Kubernetes.kubectl Helm.Helm Ookla.Speedtest.Desktop Brave.Brave Microsoft.Edge.Dev Microsoft.VisualStudioCode Starship.Starship Git.Git GitHub.GitHubDesktop OpenWhisperSystems.Signal Discord.Discord Spotify.Spotify
