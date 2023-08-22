@@ -39,10 +39,10 @@ sudo systemctl restart apache2
 echo "Apache is now serving ISO files from /var/www/html/iso"
 
 #Download the ISO files
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.1/harvester-v1.1.1-amd64.iso
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.1/harvester-v1.1.1-initrd-amd64
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.1/harvester-v1.1.1-vmlinuz-amd64
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.1/harvester-v1.1.1-rootfs-amd64.squashfs
+sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-amd64.iso
+sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-initrd-amd64
+sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-vmlinuz-amd64
+sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-rootfs-amd64.squashfs
 
 #Print the message
 echo "ISO files downloaded to /var/www/html/iso"
