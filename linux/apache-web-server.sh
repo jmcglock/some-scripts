@@ -1,22 +1,22 @@
 #!/bin/bash
 
+# Obtain elevated privileges
+sudo -s
+
 # Update package list and install apache2
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y apache2
+apt-get update && apt-get upgrade -y
+apt-get install -y apache2
 
 # Enable required Apache modules
-sudo a2enmod proxy
-sudo a2enmod proxy_http
+a2enmod proxy proxy_http
 
-# Create a directory to store ISO files
-sudo mkdir -p /var/www/html/iso
-
-# Set permissions for the ISO directory
-sudo chown -R www-data:www-data /var/www/html/iso
-sudo chmod -R 755 /var/www/html/iso
+# Create a directory to store ISO files and set permissions
+mkdir -p /var/www/html/iso
+chown -R www-data:www-data /var/www/html/iso
+chmod -R 755 /var/www/html/iso
 
 # Create a virtual host configuration for serving ISO files
-sudo bash -c "cat > /etc/apache2/sites-available/iso.conf << EOL
+cat > /etc/apache2/sites-available/iso.conf << EOL
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/html/iso
@@ -29,20 +29,24 @@ sudo bash -c "cat > /etc/apache2/sites-available/iso.conf << EOL
     ProxyPassReverse / http://127.0.0.1:80/
 </VirtualHost>
 EOL
-"
 
-# Enable the ISO virtual host and restart Apache
-sudo a2ensite iso
-sudo systemctl restart apache2
+# Enable the ISO virtual host
+a2ensite iso
+
+# Restart Apache
+systemctl restart apache2
 
 # Print the message
 echo "Apache is now serving ISO files from /var/www/html/iso"
 
+#Define the base URL
+BASE_URL="https://releases.rancher.com/harvester/v1.2.1/harvester-v1.2.1"
+
 #Download the ISO files
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-amd64.iso
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-initrd-amd64
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-vmlinuz-amd64
-sudo wget -P /var/www/html/iso https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-rootfs-amd64.squashfs
+wget -P /var/www/html/iso ${BASE_URL}-amd64.iso
+wget -P /var/www/html/iso ${BASE_URL}-initrd-amd64
+wget -P /var/www/html/iso ${BASE_URL}-vmlinuz-amd64
+wget -P /var/www/html/iso ${BASE_URL}-rootfs-amd64.squashfs
 
 #Print the message
 echo "ISO files downloaded to /var/www/html/iso"
